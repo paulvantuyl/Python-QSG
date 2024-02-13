@@ -42,8 +42,7 @@ class Surface:
 
 class Table(FurnitureTwo, Surface):
 	def __init__(self, width = 0, height = 0, material = "Wood", flat = True):
-
-		Furniture.__init__(self, width, height, material)
+		FurnitureTwo.__init__(self, width, height, material)
 		Surface.__init__(self, flat)
 		self.legs = 4
 
@@ -53,7 +52,7 @@ b = Table()
 
 # Then the weird table
 fred = Table(flat = False)
-#print(vars(a))
+print(vars(a))
 
 class FurnitureThree:
 	pass
@@ -71,3 +70,22 @@ bar = []
 # Add 8 stools to the bar
 for i in range(8):
 	bar.append(Stool(i))
+
+bar[5].number = 1000
+print(bar[5].number)
+print((len(bar)))
+
+class StoolTwo(ChairTwo):
+	pass
+
+# Create an empty dictionary named bar
+bar_dict = {}
+# Create several stool objects
+freds = StoolTwo()
+marvins = StoolTwo()
+
+# Add these to the dictionary
+bar_dict["Fred"] = freds
+bar_dict["Marvin"] = marvins
+
+print(len(bar_dict))
