@@ -24,3 +24,7 @@ class Customer:
     # The frozen argument makes objects from this class read only when
     # set to True
 @dataclass(init=True, repr=True, eq=True, order=False, frozen=False)
+class Employee:
+    name: str
+    city: str
+    wage: int
