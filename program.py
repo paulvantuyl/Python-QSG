@@ -1,6 +1,6 @@
-import distance
+import calculations
 
-dist = distance.Distance(3)
+dist = calculations.Distance(3)
 print("3 kilometers is " + str(dist.miles) + " miles.")
 
 dist.miles = 3
