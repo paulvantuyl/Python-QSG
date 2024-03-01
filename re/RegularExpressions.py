@@ -1,10 +1,11 @@
+# Import the regular expression engine
 import re
 
 # 
 # Regular expressions
 # 
 
-print("\nREGEX ------------------------------\n")
+print("\nREGEX -----------------------------------\n")
 
 text = "Hello, WORLD"
 
@@ -13,6 +14,18 @@ if re.search("hello", text, re.IGNORECASE):
     print("hello is in the string.\n")
 else:
     print("hello isn't in the string.\n")
+
+#  Does the string begin with the letter H?
+if re.search("^H", text):
+    print("The string begins with H.\n")
+else:
+    print("The string does not begin with H.\n")
+
+# Does the string end in an exclamation point?
+if re.search("\!$", text):
+    print("The string ends with an exclamation point!\n")
+else:
+    print("The string does NOT end with an exlamation point.\n")
 
 # Find and match using regex
 content = "The quick gray fox jumps over the lazy dog!\n"
@@ -54,11 +67,61 @@ for matching in matches:
     print(matching)
     print(len(matches))
 
+# A multiline string
+# A regex that can match the exact beginning of multiple lines is \A
+# \Z will match the end of a multiline
+# re.search("\AThis", text)
+multiLineText = """This is a multiline string.
+    It has multiple lines to it. So, fittingly, it's called a multiline string.
+    When you type a string and hit ENTER, 
+    a special character is inserted into the string.
+    That special character is a backslash followed by a n."""
+
+# 
+# Match function
+# 
+
+print("\nMatch function --------------------------\n")
+
+test = "Hello, World!"
+
+# Match
+if re.match("e", test):
+    print("re.match says it has an e in it.")
+else:
+    print("re.match says there's no e at the beginning.")
+
+# Search
+if re.search("e", test):
+    print("re.search says it has an e in it.")
+
+# 
+# Regex splitting and sustitution
+# 
+
+print("\nRegex splitting and substitution --------\n")
+
+test_split = "The quick brown fox is fast!"
+
+# Split by spaces using the \s metacharacter
+# Since we want to account for multiple spaces, we add + 
+space_split = re.split("\s+", test_split)
+print(space_split)
+
+# Split by word using the non-word metacharacter
+# Since we want to account for multiple non-word characters, we ad +
+word_split = re.split("\W+", test_split)
+print(word_split)
+
+# Substitute spaces with +
+plus_test = re.sub("\s+", "+", test_split)
+print(plus_test)
+
 # 
 # Find and replace
 # 
 
-print("\nFIND AND REPLACE -------------------\n")
+print("\nFIND AND REPLACE ------------------------\n")
 
 # Create a string
 a = "Hello, World!"
@@ -85,7 +148,7 @@ if c.find("House") != -1:
 # Case changes
 # 
 
-print("\nCASE CHANGES -----------------------\n")
+print("\nCASE CHANGES ----------------------------\n")
 
 # Create our string
 title = "Python QuickStart Guide"
@@ -106,7 +169,7 @@ print(tongue_twister)
 # String modifications
 #
 
-print("\nSTRING MODIFICATIONS ---------------\n")
+print("\nSTRING MODIFICATIONS --------------------\n")
 # A simple string
 fox = "The quick brown fox jumps over the lazy dog."
 
@@ -140,7 +203,7 @@ print(glossary_string)
 # Working with user inputs
 #
 
-print("\nUSER INPUT STUFF -------------------\n")
+print("\nUSER INPUT STUFF ------------------------\n")
 # Ask user for a value
 value = input("Please enter a value: ")
 
