@@ -31,7 +31,8 @@ class CoffeeShopSimulator:
 		self.temps = self.make_temp_distribution()
 		
 	def run(self):
-		print("\nOk, let's get started. Have fun!")
+		welcome_message = "Ok, let's get started. Have fun!"
+		print(f"\n{welcome_message}")
 		
 		# The main game loop
 		running = True
