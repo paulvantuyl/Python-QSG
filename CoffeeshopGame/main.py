@@ -12,6 +12,7 @@ from coffee_shop_simulator import CoffeeShopSimulator
 welcome()
 
 # Get name and store name
+# Variables with t_ in front are temporary as used by teacher
 t_name = prompt("Like, what's your name bro? ", True)
 t_shop_name = prompt("What you want to call your coffee shop? ", True)
 
@@ -19,3 +20,6 @@ t_shop_name = prompt("What you want to call your coffee shop? ", True)
 game = CoffeeShopSimulator(t_name, t_shop_name)
 
 game.run()
+
+# Say goodbye!
+print("\nThanks for playing. Have a great day, player!\n")

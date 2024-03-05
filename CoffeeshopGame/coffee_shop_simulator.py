@@ -46,10 +46,27 @@ class CoffeeShopSimulator:
 			# Display the cash and the weather
 			self.daily_stats(temperature)
 			
-			# Get the price of a cup of coffee
-			cup_price = float(prompt(
-				"What do you want to charge per cup of coffee? "))
-			
+			# Get the price of a cup of coffee (but provide an escape hatch)
+			response = prompt("What do you want to charge per cup of coffee? (type exit to quit)")
+			if re.search("^exit", response, re.IGNORECASE):
+				running = False
+				continue
+			else:
+				cup_price = int(response)
+
+			# Do they want to buy more coffee inventory?
+			response = prompt("Want to buy more coffee? (hit ENTER for none or enter the number)", False)
+			if response:
+				if not self.buy_coffee(response):
+					print("Could not buy additional coffee.")
+
+			# TODO: Force user to buy coffee if they are out of inventory
+			# Could be an evaluation of the coffee sold previously
+			# if self.coffee_inventory <= 0:
+			# 	print("\n( GAME OVER! You ran out of coffee. )")
+			# 	running = False
+			# 	continue
+	
 			# Get advertising spend
 			print("\nYou can buy advertising to help promote sales.")
 			advertising = prompt(
@@ -74,6 +91,11 @@ class CoffeeShopSimulator:
 			
 			# Subtract inventory
 			self.coffee_inventory -= cups_sold
+
+			if self.cash < 0:
+				print("\n( GAME OVER! You ran out of cash. )")
+				running = False
+				continue
 			
 			# Before we loop around, add a day
 			self.increment_day()
@@ -103,13 +125,12 @@ class CoffeeShopSimulator:
 		except ValueError:
 			return False
 		
-		if i_amount >= self.cash:
+		if i_amount <= self.cash:
 			self.coffee_inventory += i_amount
 			self.cash -= i_amount
 			return True
-		
 		else:
-			return True
+			return False
 		
 	# Faux temp distributions. We'll do this better
 	# later with a bell curve, but for now a quick hack	
@@ -163,6 +184,9 @@ class CoffeeShopSimulator:
 	# Huh?!
 	def daily_sales(self, temperature, advertising):
 		return int((self.TEMP_MAX - temperature) * (advertising * 0.5))
+		if sales > self.coffee_inventory:
+			sales = self.coffee_inventory
+			print("You would have sold more coffee but you ran out. Be sure to buy additional inventory.")
 		
 	@property
 	def weather(self):
