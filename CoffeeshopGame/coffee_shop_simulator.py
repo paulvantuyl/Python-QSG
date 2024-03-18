@@ -1,13 +1,18 @@
 # Import needed modules
 import random
 import re
+import numpy
 from utilities import *
 
 class CoffeeShopSimulator:
 
 	# Minimum and maximum temperatures
-	TEMP_MIN = 45
-	TEMP_MAX = 85
+	TEMP_MIN = 20
+	TEMP_MAX = 90
+
+	# Length of temperature list
+	# Higher produces more realistic curve
+	SERIES_DENSITY = 300
 	
 	def __init__(self, player_name, shop_name):
 
@@ -22,6 +27,7 @@ class CoffeeShopSimulator:
 		self.cash = 100.00
 		
 		# Inventory at start
+		# What is this definition? 100 servings?
 		self.coffee_inventory = 100
 		
 		# Sales list
@@ -47,7 +53,7 @@ class CoffeeShopSimulator:
 			self.daily_stats(temperature)
 			
 			# Get the price of a cup of coffee (but provide an escape hatch)
-			response = prompt("What do you want to charge per cup of coffee? (type exit to quit)")
+			response = prompt("What do you want to charge per cup of coffee? (type exit to quit\)")
 			if re.search("^exit", response, re.IGNORECASE):
 				running = False
 				continue
